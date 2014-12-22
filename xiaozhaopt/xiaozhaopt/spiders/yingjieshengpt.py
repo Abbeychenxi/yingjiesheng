@@ -218,9 +218,7 @@ class InfoParser(HTMLParser.HTMLParser):
             elif self.table and tag.lower() == u'td':
                 self.parse_res.append(u'<%s>' % tag)
         elif tag == u'br':
-            self.parse_res.append(u'<%s>\n' % tag)
-        elif tag == u'o:p':
-            self.parse_res.append(u'\n')
+            self.parse_res.append(u'\n' % tag)
 
     def handle_endtag(self, tag):
         if tag.lower() in (u'tbody', u'td', u'tr'):
