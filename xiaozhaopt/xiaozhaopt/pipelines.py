@@ -75,7 +75,10 @@ class XiaozhaoptPipeline(object):
             elif key == 'description':
                 try:
                     if item['description']:
-                        ensureItem[key] = self.dealInfo(item['description'])
+                        t = u''
+                        for index in item['description']:
+                            t += index
+                        ensureItem[key] = t
                     else:
                         ensureItem[key] = u''
                 except KeyError:
