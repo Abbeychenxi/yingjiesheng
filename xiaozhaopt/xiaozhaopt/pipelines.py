@@ -14,6 +14,10 @@ class XiaozhaoptPipeline(object):
     def process_item(self, item, spider):
         ensureItem = self._conditionalItem_(item)
         r = requests.post(self.Link, data=ensureItem)
+        if r.status_code == requests.codes.ok:
+            sql = 'insert into links values ("' + ensureItem['link'] + '")'
+            spider.cu.execute(sql)
+            spider.cx.commit()
         return item
 
     def _conditionalItem_(self, item):

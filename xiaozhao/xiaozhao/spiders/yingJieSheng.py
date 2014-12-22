@@ -104,9 +104,9 @@ class Yjs(CrawlSpider):
                     if self.cu.fetchone():
                         pass
                     else:
-                        sql = 'insert into links values ("' + link_str + '")'
-                        self.cu.execute(sql)
-                        self.cx.commit()
+                        # sql = 'insert into links values ("' + link_str + '")'
+                        # self.cu.execute(sql)
+                        # self.cx.commit()
                         yield Request(link_str, callback=self.parse_page)
                 else:
                     continue
@@ -219,8 +219,11 @@ class Yjs(CrawlSpider):
         description = info.extract()
         parse_res = []
         parse = InfoParser(parse_res)
-        parse.feed(description[0])
-        parse_res = parse.outRes()
+        try:
+            parse.feed(description[0])
+            parse_res = parse.outRes()
+        except IndexError:
+            parse_res = []
         return parse_res
 
 class InfoParser(HTMLParser.HTMLParser):
@@ -239,7 +242,7 @@ class InfoParser(HTMLParser.HTMLParser):
             elif self.table and tag.lower() == u'td':
                 self.parse_res.append(u'<%s>' % tag)
         elif tag == u'br':
-            self.parse_res.append(u'\n' % tag)
+            self.parse_res.append(u'\n')
 
 
     def handle_endtag(self, tag):
