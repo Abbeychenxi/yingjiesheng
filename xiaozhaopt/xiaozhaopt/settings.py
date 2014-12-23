@@ -16,8 +16,11 @@ NEWSPIDER_MODULE = 'xiaozhaopt.spiders'
 COOKIES_ENABLED = False
 
 DOWNLOADER_MIDDLEWARES = {
-        'scrapy.middlerware.downloadermiddleware.useragent.UserAgentMiddleware': None,
-        'xiaozhaopt.middlerware.rotate_useragent.RotateUserAgentMiddleware': 400
+        'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+        'xiaozhaopt.middlewares.rotate_useragent.RotateUserAgentMiddleware': 400,
+        'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+        'xiaozhaopt.middlewares.Proxyware.ProxyMiddleware': 100,
+        'xiaozhaopt.middlewares.google_cache.GoogleCacheMiddleware': 50,
     }
 
 DOWNLOAD_DELAY = 1

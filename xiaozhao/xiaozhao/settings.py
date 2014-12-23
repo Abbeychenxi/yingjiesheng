@@ -17,11 +17,14 @@ COOKIES_ENABLED = False
 
 
 DOWNLOADER_MIDDLEWARES = {
-        'scrapy.middlerware.downloadermiddleware.useragent.UserAgentMiddleware': None,
-        'xiaozhao.middlerware.rotate_useragent.RotateUserAgentMiddleware': 400
+        'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+        'xiaozhao.middlewares.rotate_useragent.RotateUserAgentMiddleware': 400,
+        'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+        'xiaozhao.middlewares.Proxyware.ProxyMiddleware': 100,
+        'xiaozhao.middlewares.google_cache.GoogleCacheMiddleware': 50,
     }
 
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 2
 
 
 ITEM_PIPELINES = ['xiaozhao.pipelines.XiaozhaoPipeline']
