@@ -98,15 +98,16 @@ class Yjs(CrawlSpider):
                 time_time = int(time.mktime(date_time.timetuple()))
                 date_now = datetime.date.today()
                 now_time = int(time.mktime(date_now.timetuple()))
-                if now_time - time_time <= 3 * 24 * 60 * 60:
+                if now_time - time_time <= 1 * 24 * 60 * 60:
                     sql = 'select * from links where url="' + link_str + '"'
                     self.cu.execute(sql)
-                    if self.cu.fetchone():
+                    url = self.cu.fetchone()
+                    if url:
                         pass
                     else:
-                        # sql = 'insert into links values ("' + link_str + '")'
-                        # self.cu.execute(sql)
-                        # self.cx.commit()
+                        sql = 'insert into links values ("' + link_str + '")'
+                        self.cu.execute(sql)
+                        self.cx.commit()
                         yield Request(link_str, callback=self.parse_page)
                 else:
                     continue

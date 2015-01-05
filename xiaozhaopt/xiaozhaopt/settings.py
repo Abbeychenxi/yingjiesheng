@@ -23,7 +23,7 @@ DOWNLOADER_MIDDLEWARES = {
         'xiaozhaopt.middlewares.google_cache.GoogleCacheMiddleware': 50,
     }
 
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 2
 
 ITEM_PIPELINES = ['xiaozhaopt.pipelines.XiaozhaoptPipeline']
 
