@@ -131,9 +131,7 @@ class Yjspt(CrawlSpider):
             item['professionalLabel'] = []
         info = sel.xpath('//div[@class="jobIntro"] | //div[@class="job_list"]')
         try:
-            if item['position']:
-                pass
-            else:
+            if not item['position']:
                 item['position'] = info.xpath('h1/a/text()').extract()
         except KeyError:
             pass

@@ -8,9 +8,98 @@
 import requests
 import time
 import sqlite3
+import jieba
+from scrapy import log
+
+class Industry:
+    def __init__(self):
+        electronicBusiness = set([u'电商', u'电子商务'])
+        filmAndTelevisionDrama = set([u'电影', u'戏剧'])
+        education = set([u'教育', u'教师', u'校长', u'教学'])
+        medicalCare = set([u'医生', u'医院', u'妇幼保健'])
+        music = set([u'音乐'])
+        software = set([u'软件', u'软件工程', u'运维', u'系统', u'ERP', u'java', u'c++', u'Android', u'算法', u'驱动', u'ios', u'前端', u'测试', u'.net', u'it', u'手机', u'移动', u'c'])
+        biological = set([u'生物', u'细胞', u'血清', u'染色体'])
+        pharmacy = set([u'制药', u'医药', u'药剂'])
+        civil = set([u'土木', u'建筑'])
+        machinery = set([u'机械', u'飞行器', u'航空', u'硬件', u'操作工'])
+        electric = set([u'电气', u'电磁', u'低频'])
+        electronic = set([u'电子', u'射频', u'天线', u'电控'])
+        chemicalIndustry = set([u'化工', u'工艺', u'工程控制'])
+        material = set([u'材料'])
+        insurance = set([u'保险'])
+        securities = set([u'证券', u'金融'])
+        bank = set([u'银行'])
+        exhibition = set([u'会展'])
+        foreignTrade = set([u'外贸'])
+        communication = set([u'通信'])
+        executiveSecretary = set([u'行政', u'文秘', u'VP', u'助理', u'管理', u'前台', u'经理'])
+        customerService = set([u'客服'])
+        sales = set([u'销售', u'客户代表', u'客户经理'])
+        reporterEditor = set([u'记者', u'编辑', u'推广', u'策划', u'文案'])
+        investmentBank = set([u'投行', u'投资', u'风险投资'])
+        legal = set([u'法律', u'律师', u'律师事务所'])
+        advisory = set([u'咨询', u'顾问'])
+        logistics = set([u'物流'])
+        artAndDesign = set([u'艺术', u'设计', u'平面设计师', u'卡通形象设计师'])
+        finance = set([u'财务', u'会计', u'信贷', u'审计'])
+        humanResources = set([u'人力资源', u'猎头', u'人事'])
+        marketing = set([u'营销', u'运营', u'市场'])
+        others = set([u'网管'])
+        internet = set([u'互联网', u'PHP', u'web前端', u'产品经理', u'云计算', u'数据处理', u'机器学习', u'数据挖掘', u'自然语言处理', u'研发', u'反病毒', u'网购安全', u'搜索', u'网站', u'数据分析', u'产品leader', u'研发', u'项目经理', u'大数据', u'语言', u'网络', u'python', u'django'])
+
+        industry = {
+            u"电商": electronicBusiness,
+            u"影视/戏剧": filmAndTelevisionDrama,
+            u"教育": education,
+            u"医疗": medicalCare,
+            u"音乐": music,
+            u"软件": software,
+            u"生物": biological,
+            u"制药": pharmacy,
+            u"土木": civil,
+            u"机械": machinery,
+            u"电气": electric,
+            u"电子": electronic,
+            u"化工": chemicalIndustry,
+            u"材料": material,
+            u"保险": insurance,
+            u"证券": securities,
+            u"银行": bank,
+            u"会展": exhibition,
+            u"外贸": foreignTrade,
+            u"通信": communication,
+            u"行政/文秘": executiveSecretary,
+            u"客服": customerService,
+            u"销售": sales,
+            u"记者/编辑": reporterEditor,
+            u"投行": investmentBank,
+            u"法律": legal,
+            u"咨询": advisory,
+            u"物流": logistics,
+            u"艺术/设计": artAndDesign,
+            u"财务/会计": finance,
+            u"人力资源": humanResources,
+            u"市场营销": marketing,
+            u"其他": others,
+            u"互联网": internet
+        }
+        self.reversedIndustry = {}
+        for key in industry.iterkeys():
+            for value in industry[key]:
+                self.reversedIndustry[value] = key
+
+    def handleInfo(self, info):
+        keywords = jieba.cut(info)
+        infoIndustry = set()
+        for word in keywords:
+            if word in self.reversedIndustry:
+                infoIndustry.add(self.reversedIndustry[word])
+        return infoIndustry
 
 class XiaozhaoPipeline(object):
     Link = 'http://backend.xiaomo.com/api/job/job'
+    industryHandler = Industry()
     def process_item(self, item, spider):
         ensureItem = self._conditionalItem_(item)
         r = requests.post(self.Link, data=ensureItem)
@@ -27,7 +116,7 @@ class XiaozhaoPipeline(object):
 
     def _conditionalItem_(self, item):
         ensureItem = {}
-        for key in ('link', 'job', 'place', 'type', 'email', 'tag', 'description'):
+        for key in ('link', 'job', 'place', 'type', 'email', 'tag', 'description', 'releaseTime', 'industry'):
             if key == 'link':
                 try:
                     if item['link']:
@@ -96,6 +185,24 @@ class XiaozhaoPipeline(object):
                         ensureItem[key] = u''
                 except KeyError:
                     pass
+            elif key == 'industry':
+                # if ensureItem['tag']:
+                #     ensureItem[key] = ensureItem['tag']
+                # else:
+                #     try:
+                #         info = ensureItem['job'] + self.dealInfo(item['position'])
+                #     except KeyError:
+                #         info = ensureItem['job']
+                #     industry = self.industryInfo(info)
+                try:
+                    info = ensureItem['job'] + self.dealInfo(item['position'])
+                except KeyError:
+                    info = ensureItem['job']
+                if info:
+                    industry = self.industryInfo(info)
+                else:
+                    industry = u'None'
+                ensureItem[key] = industry
         return ensureItem
 
     def dealInfo(self, temp):
@@ -104,3 +211,8 @@ class XiaozhaoPipeline(object):
             t += index
             t += u' '
         return t
+
+    def industryInfo(self, info):
+        setOfIndustry = self.industryHandler.handleInfo(info.lower())
+        industry = ' '.join(setOfIndustry)
+        return industry

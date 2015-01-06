@@ -60,7 +60,7 @@ class Yjs(CrawlSpider):
     #               'http://www.yingjiesheng.com/jiangxijob/list_1.html'
     #               ]
     start_urls = [
-        "http://www.yingjiesheng.com/nanjing-morejob-1.html"
+        "http://www.yingjiesheng.com/beijing-morejob-1.html"
     ]
 
     def __init__(self):
@@ -165,9 +165,7 @@ class Yjs(CrawlSpider):
             item['professionalLabel'] = []
         info = sel.xpath('//div[@class="jobIntro"] | //div[@class="job_list"]')
         try:
-            if item['position']:
-                pass
-            else:
+            if not item['position']:
                 item['position'] = info.xpath('h1/a/text()').extract()
         except KeyError:
             pass
