@@ -98,7 +98,7 @@ class Industry:
         return infoIndustry
 
 class XiaozhaoPipeline(object):
-    Link = 'http://backend.xiaomo.com/api/job/job'
+    Link = 'http://cv.test.xiaomo.com/api/job/job'
     industryHandler = Industry()
     def process_item(self, item, spider):
         ensureItem = self._conditionalItem_(item)
@@ -137,6 +137,7 @@ class XiaozhaoPipeline(object):
                 try:
                     if item['workPlace']:
                         ensureItem[key] = self.dealInfo(item['workPlace'])
+                        ensureItem[key].replace(u'其他', u'')
                     else:
                         ensureItem[key] = u''
                 except KeyError:
@@ -206,13 +207,10 @@ class XiaozhaoPipeline(object):
         return ensureItem
 
     def dealInfo(self, temp):
-        t = u''
-        for index in temp:
-            t += index
-            t += u' '
+        t = u','.join(temp)
         return t
 
     def industryInfo(self, info):
         setOfIndustry = self.industryHandler.handleInfo(info.lower())
-        industry = ' '.join(setOfIndustry)
+        industry = u','.join(setOfIndustry)
         return industry

@@ -119,8 +119,11 @@ class Yjs(CrawlSpider):
             for i in range(2, 6):
                 nextPage = pre + str(i) + end
                 yield Request(nextPage, callback=self.parse)
-            indexOfLine = url.index('-')
-            yield Request('www.yingjiesheng.com/' + url[0: indexOfLine] + '/')
+            try:
+                indexOfLine = url.index('-')
+                yield Request('www.yingjiesheng.com/' + url[0: indexOfLine] + '/')
+            except ValueError:
+                pass
 
     def re_yingjiesheng(self):
         pattern_yingjiesheng = re.compile(r'\W+[yY]{0,1}\W*ing\W*[jJ]{0,1}\W*i{0,1}e{0,1}\W*[sS]{0,1}\W*h{0,1}e{0,1}n{0,1}g{0,1}')
