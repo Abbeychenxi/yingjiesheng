@@ -213,6 +213,7 @@ class Yjs(CrawlSpider):
                         place_work += u','
                         place_work += city
                 place_work = place_work.replace(u'其它', u'').replace(u' ', u'')
+                place_work = place_work[1:] if place_work[0] == u',' else place_work
                 item['workPlace'] = [place_work]
         except NameError:
             pass
