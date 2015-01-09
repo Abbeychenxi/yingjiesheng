@@ -1,3 +1,4 @@
+#coding: utf-8
 __author__ = 'Abbey'
 
 import scrapy
@@ -60,7 +61,7 @@ class Yjs(CrawlSpider):
     #               'http://www.yingjiesheng.com/jiangxijob/list_1.html'
     #               ]
     start_urls = [
-        "http://www.yingjiesheng.com/beijing-morejob-1.html"
+        "http://www.yingjiesheng.com/nanjing-morejob-1.html"
     ]
 
     def __init__(self):
@@ -206,14 +207,12 @@ class Yjs(CrawlSpider):
             #         description[i] = u''
         try:
             if citys:
-                place_work = u''
-                for place in item['workPlace']:
-                    place_work += place
-                    place_work += u' '
+                place_work = u','.join(item['workPlace'])
                 for city in citys:
                     if city not in place_work:
+                        place_work += u','
                         place_work += city
-                        place_work += u' '
+                place_work = place_work.replace(u'其它', u'').replace(u' ', u'')
                 item['workPlace'] = [place_work]
         except NameError:
             pass

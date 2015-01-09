@@ -1,3 +1,4 @@
+#coding: utf-8
 __author__ = 'Abbey'
 
 import scrapy
@@ -181,14 +182,12 @@ class Yjspt(CrawlSpider):
         item['description'] = description
         try:
             if citys:
-                place_work = u''
-                for place in item['workPlace']:
-                    place_work += place
-                    place_work += u' '
+                place_work = u','.join(item['workPlace'])
                 for city in citys:
                     if city not in place_work:
+                        place_work += u','
                         place_work += city
-                        place_work += u' '
+                place_work = place_work.replace(u'其它', u'').replace(u' ', u'')
                 item['workPlace'] = [place_work]
         except NameError:
             pass

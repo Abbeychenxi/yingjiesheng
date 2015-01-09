@@ -138,7 +138,6 @@ class XiaozhaoptPipeline(object):
                 try:
                     if item['workPlace']:
                         ensureItem[key] = self.dealInfo(item['workPlace'])
-                        ensureItem[key].replace(u'其他', u'')
                     else:
                         ensureItem[key] = u''
                 except KeyError:
