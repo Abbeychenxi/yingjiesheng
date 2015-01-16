@@ -20,49 +20,49 @@ class Yjs(CrawlSpider):
     name = "yjs"
     allowed_domains = ['yingjiesheng.com']
 
-    # start_urls = ['http://www.yingjiesheng.com/beijing-morejob-1.html',
-    #               'http://www.yingjiesheng.com/shanghai-morejob-1.html',
-    #               'http://www.yingjiesheng.com/guangzhou-morejob-1.html',
-    #               'http://www.yingjiesheng.com/tianjin-morejob-1.html',
-    #               'http://www.yingjiesheng.com/nanjing-morejob-1.html',
-    #               'http://www.yingjiesheng.com/shenzhen-morejob-1.html',
-    #               'http://www.yingjiesheng.com/jinanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/wuhan-morejob-1.html',
-    #               'http://www.yingjiesheng.com/chengdu-morejob-1.html',
-    #               'http://www.yingjiesheng.com/dalianjob/list_1.html',
-    #               'http://www.yingjiesheng.com/hangzhoujob/list_1.html',
-    #               'http://www.yingjiesheng.com/chongqingjob/list_1.html',
-    #               'http://www.yingjiesheng.com/qingdaojob/list_1.html',
-    #               'http://www.yingjiesheng.com/fuzhoujob/list_1.html',
-    #               'http://www.yingjiesheng.com/xianjob/list_1.html',
-    #               'http://www.yingjiesheng.com/shandongjob/list_1.html',
-    #               'http://www.yingjiesheng.com/jiangsujob/list_1.html',
-    #               'http://www.yingjiesheng.com/guangdongjob/list_1.html',
-    #               'http://www.yingjiesheng.com/liaoningjob/list_1.html',
-    #               'http://www.yingjiesheng.com/hubeijob/list_1.html',
-    #               'http://www.yingjiesheng.com/sichuanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/hebeijob/list_1.html',
-    #               'http://www.yingjiesheng.com/zhejiangjob/list_1.html',
-    #               'http://www.yingjiesheng.com/yunnanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/jilinjob/list_1.html',
-    #               'http://www.yingjiesheng.com/fujianjob/list_1.html',
-    #               'http://www.yingjiesheng.com/guizhoujob/list_1.html',
-    #               'http://www.yingjiesheng.com/shanxijob/list_1.html',
-    #               'http://www.yingjiesheng.com/henanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/guangxijob/list_1.html',
-    #               'http://www.yingjiesheng.com/shanxijob/list_1.html',
-    #               'http://www.yingjiesheng.com/hunanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/hainanjob/list_1.html',
-    #               'http://www.yingjiesheng.com/heilongjiangjob/list_1.html',
-    #               'http://www.yingjiesheng.com/neimenggujob/list_1.html',
-    #               'http://www.yingjiesheng.com/gansuningxiaqinghaijob/list_1.html',
-    #               'http://www.yingjiesheng.com/xinjiangxizangjob/list_1.html',
-    #               'http://www.yingjiesheng.com/anhuijob/list_1.html',
-    #               'http://www.yingjiesheng.com/jiangxijob/list_1.html'
-    #               ]
-    start_urls = [
-        "http://www.yingjiesheng.com/nanjing-morejob-1.html"
-    ]
+    start_urls = ['http://www.yingjiesheng.com/beijing-morejob-1.html',
+                  'http://www.yingjiesheng.com/shanghai-morejob-1.html',
+                  'http://www.yingjiesheng.com/guangzhou-morejob-1.html',
+                  'http://www.yingjiesheng.com/tianjin-morejob-1.html',
+                  'http://www.yingjiesheng.com/nanjing-morejob-1.html',
+                  'http://www.yingjiesheng.com/shenzhen-morejob-1.html',
+                  'http://www.yingjiesheng.com/jinanjob/list_1.html',
+                  'http://www.yingjiesheng.com/wuhan-morejob-1.html',
+                  'http://www.yingjiesheng.com/chengdu-morejob-1.html',
+                  'http://www.yingjiesheng.com/dalianjob/list_1.html',
+                  'http://www.yingjiesheng.com/hangzhoujob/list_1.html',
+                  'http://www.yingjiesheng.com/chongqingjob/list_1.html',
+                  'http://www.yingjiesheng.com/qingdaojob/list_1.html',
+                  'http://www.yingjiesheng.com/fuzhoujob/list_1.html',
+                  'http://www.yingjiesheng.com/xianjob/list_1.html',
+                  'http://www.yingjiesheng.com/shandongjob/list_1.html',
+                  'http://www.yingjiesheng.com/jiangsujob/list_1.html',
+                  'http://www.yingjiesheng.com/guangdongjob/list_1.html',
+                  'http://www.yingjiesheng.com/liaoningjob/list_1.html',
+                  'http://www.yingjiesheng.com/hubeijob/list_1.html',
+                  'http://www.yingjiesheng.com/sichuanjob/list_1.html',
+                  'http://www.yingjiesheng.com/hebeijob/list_1.html',
+                  'http://www.yingjiesheng.com/zhejiangjob/list_1.html',
+                  'http://www.yingjiesheng.com/yunnanjob/list_1.html',
+                  'http://www.yingjiesheng.com/jilinjob/list_1.html',
+                  'http://www.yingjiesheng.com/fujianjob/list_1.html',
+                  'http://www.yingjiesheng.com/guizhoujob/list_1.html',
+                  'http://www.yingjiesheng.com/shanxijob/list_1.html',
+                  'http://www.yingjiesheng.com/henanjob/list_1.html',
+                  'http://www.yingjiesheng.com/guangxijob/list_1.html',
+                  'http://www.yingjiesheng.com/shanxijob/list_1.html',
+                  'http://www.yingjiesheng.com/hunanjob/list_1.html',
+                  'http://www.yingjiesheng.com/hainanjob/list_1.html',
+                  'http://www.yingjiesheng.com/heilongjiangjob/list_1.html',
+                  'http://www.yingjiesheng.com/neimenggujob/list_1.html',
+                  'http://www.yingjiesheng.com/gansuningxiaqinghaijob/list_1.html',
+                  'http://www.yingjiesheng.com/xinjiangxizangjob/list_1.html',
+                  'http://www.yingjiesheng.com/anhuijob/list_1.html',
+                  'http://www.yingjiesheng.com/jiangxijob/list_1.html'
+                  ]
+    # start_urls = [
+    #     "http://www.yingjiesheng.com/nanjing-morejob-1.html"
+    # ]
 
     def __init__(self):
         CrawlSpider.__init__(self)
@@ -207,13 +207,15 @@ class Yjs(CrawlSpider):
             #         description[i] = u''
         try:
             if citys:
-                place_work = u','.join(item['workPlace'])
+                place_work = u','.join(item['workPlace']).replace(u' ', u',')
                 for city in citys:
                     if city not in place_work:
                         place_work += u','
                         place_work += city
-                place_work = place_work.replace(u'其它', u'').replace(u' ', u'')
+                place_work = place_work.replace(u'其它', u'').replace(u'其他', u'').replace(u' ', u'')
                 place_work = place_work[1:] if place_work[0] == u',' else place_work
+                place_work = place_work[:-1] if place_work[-1] == u',' else place_work
+                place_work = place_work.replace(u',,,', u',')
                 item['workPlace'] = [place_work]
         except NameError:
             pass

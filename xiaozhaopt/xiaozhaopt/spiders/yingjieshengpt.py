@@ -20,16 +20,16 @@ class Yjspt(CrawlSpider):
     name = "yjspt"
     allowed_domains = ['yingjiesheng.com']
 
-    # start_urls = ['http://www.yingjiesheng.com/beijing-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/shanghai-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/guangzhou-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/tianjin-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/nanjing-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/shenzhen-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/wuhan-moreptjob-1.html',
-    #               'http://www.yingjiesheng.com/chengdu-moreptjob-1.html'
-    #               ]
-    start_urls = ['http://www.yingjiesheng.com/beijing-moreptjob-1.html']
+    start_urls = ['http://www.yingjiesheng.com/beijing-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/shanghai-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/guangzhou-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/tianjin-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/nanjing-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/shenzhen-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/wuhan-moreptjob-1.html',
+                  'http://www.yingjiesheng.com/chengdu-moreptjob-1.html'
+                  ]
+    # start_urls = ['http://www.yingjiesheng.com/beijing-moreptjob-1.html']
 
     def __init__(self):
         CrawlSpider.__init__(self)
@@ -182,13 +182,15 @@ class Yjspt(CrawlSpider):
         item['description'] = description
         try:
             if citys:
-                place_work = u','.join(item['workPlace'])
+                place_work = u','.join(item['workPlace']).replace(u' ', u',')
                 for city in citys:
                     if city not in place_work:
                         place_work += u','
                         place_work += city
-                place_work = place_work.replace(u'其它', u'').replace(u' ', u'')
+                place_work = place_work.replace(u'其它', u'').replace(u'其他', u'').replace(u' ', u'')
                 place_work = place_work[1:] if place_work[0] == u',' else place_work
+                place_work = place_work[:-1] if place_work[-1] == u',' else place_work
+                place_work = place_work.replace(u',,,', u',')
                 item['workPlace'] = [place_work]
         except NameError:
             pass
