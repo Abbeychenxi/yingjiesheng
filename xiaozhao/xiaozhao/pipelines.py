@@ -103,7 +103,6 @@ class XiaozhaoPipeline(object):
     def process_item(self, item, spider):
         ensureItem = self._conditionalItem_(item)
         r = requests.post(self.Link, data=ensureItem)
-        log.msg(r.status_code, level=log.DEBUG)
         # if r.status_code == requests.codes.ok:
         #     try:
         #         sql = 'insert into links values ("' + ensureItem['link'] + '")'
