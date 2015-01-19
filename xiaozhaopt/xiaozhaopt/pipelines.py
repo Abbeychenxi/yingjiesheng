@@ -100,7 +100,7 @@ class Industry:
 
 
 class XiaozhaoptPipeline(object):
-    Link = 'http://cv.test.xiaomo.com/api/job/job'
+    Link = 'http://cv.xiaomo.com/api/job/job'
     industryHandler = Industry()
     def process_item(self, item, spider):
         ensureItem = self._conditionalItem_(item)

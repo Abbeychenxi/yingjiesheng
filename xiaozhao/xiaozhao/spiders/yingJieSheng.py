@@ -250,7 +250,6 @@ class InfoParser(HTMLParser.HTMLParser):
         elif tag == u'br':
             self.parse_res.append(u'\n')
 
-
     def handle_endtag(self, tag):
         if tag.lower() in (u'tbody', u'td', u'tr'):
             if self.table:
@@ -258,7 +257,6 @@ class InfoParser(HTMLParser.HTMLParser):
             if tag.lower() == u'tbody':
                 self.table.pop()
                 self.parse_res.append(u'</table>')
-
 
     def handle_data(self, data):
         if re.match(u'\u672c\u7ad9\u63d0\u9192:\u5982\u4f55\u8bc6\u522b\u865a\u5047\u62db\u8058\u4fe1\u606f\uff1f\u6c42\u804c\u5fc5\u770b\uff0c\u5207\u52ff\u53d7\u9a97\u4e0a\u5f53\uff01', data) or re.match(u'\u5982\u4f55\u5199\u4e00\u4efd\u7b80\u5355\u3001\u76f4\u63a5\u3001\u9ad8\u6548\u7684\u6c42\u804c\u4fe1\uff1f', data):
